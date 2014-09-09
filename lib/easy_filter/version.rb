@@ -1,4 +1,4 @@
 # EasyFilter version number
 module EasyFilter
-  VERSION = '0.0.4.alpha'
+  VERSION = '0.0.4'
 end
