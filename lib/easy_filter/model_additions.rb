@@ -12,16 +12,9 @@ module EasyFilter
         next unless key.start_with?(prefixes[:main]) && !value.blank? && key != "#{prefixes[:main]}button"
 
         field = key.gsub(prefixes[:main], '').to_s
-        if field.start_with?(prefixes[:from])
-          filter = filter.where("#{field.gsub(prefixes[:from], '')} >= ?", value)
-        elsif field.start_with?(prefixes[:to])
-          filter = filter.where("#{field.gsub(prefixes[:to], '')} <= ?", value)
-        elsif field.start_with?(prefixes[:exact])
-          filter = filter.where("#{field.gsub(prefixes[:exact], '')} = ?", value)
-        else
-          filter = filter.where("#{field} like ?", "%#{value}%")
-        end
+        filter = add_where(filter, field, value, prefixes)
       end
+
       params[prefixes[:sort]] ||= 'id'
       params[prefixes[:direction]] ||= 'desc'
 
@@ -29,6 +22,23 @@ module EasyFilter
       sort_direction = %w(asc desc).include?(params[prefixes[:direction]]) ? params[prefixes[:direction]] : 'desc'
 
       filter.order("#{sort_column} #{sort_direction}")
+    end
+
+    private
+
+    def add_where(filter, field, value, prefixes)
+      if field.start_with?(prefixes[:from])
+        filter.where("#{field.gsub(prefixes[:from], '')} >= ?", value)
+
+      elsif field.start_with?(prefixes[:to])
+        filter.where("#{field.gsub(prefixes[:to], '')} <= ?", value)
+
+      elsif field.start_with?(prefixes[:exact])
+        filter.where("#{field.gsub(prefixes[:exact], '')} = ?", value)
+
+      else
+        filter.where("#{field} like ?", "%#{value}%")
+      end
     end
   end
 end
