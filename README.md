@@ -20,6 +20,14 @@ Or install it yourself as:
 
     $ gem install easy_filter
 
+In `application.js`:
+
+    //= require easy_filter
+
+In `application.css.scss`:
+
+     *= require easy_filter
+
 ## Usage
 
 Gem provide an AciveRecord model addition and a view helper.
