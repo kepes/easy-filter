@@ -11,7 +11,7 @@ module EasyFilter
       params.each do |key, value|
         next unless key.start_with?(prefixes[:main]) && !value.blank? && key != "#{prefixes[:main]}button"
 
-        field = key.gsub(prefixes[:main], '').to_s
+        field = del_prefix(key, prefixes[:main])
         filter = add_where(filter, field, value, prefixes)
       end
 
@@ -28,17 +28,22 @@ module EasyFilter
 
     def add_where(filter, field, value, prefixes)
       if field.start_with?(prefixes[:from])
-        filter.where("#{field.gsub(prefixes[:from], '')} >= ?", value)
+        filter.where("#{del_prefix(field, prefixes[:from])} >= ?", value)
 
       elsif field.start_with?(prefixes[:to])
-        filter.where("#{field.gsub(prefixes[:to], '')} <= ?", value)
+        filter.where("#{del_prefix(field, prefixes[:to])} <= ?", value)
 
       elsif field.start_with?(prefixes[:exact])
-        filter.where("#{field.gsub(prefixes[:exact], '')} = ?", value)
+        filter.where("#{del_prefix(field, prefixes[:exact])} = ?", value)
 
       else
         filter.where("#{field} like ?", "%#{value}%")
       end
+    end
+
+    def del_prefix(name, prefix)
+      return name.gsub(prefix, '').to_s if name.start_with?(prefix)
+      name
     end
   end
 end
