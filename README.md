@@ -2,7 +2,7 @@
 
 By [Peter Kepes](https://github.com/kepes).
 
-Filter and sort ActiveRecord model for Rails app with [Bootstrap](http://getbootstrap.com/) view helpers.
+Filter and sort `ActiveRecord` model for Rails app with [Bootstrap](http://getbootstrap.com/) view helpers.
 
 ## Installation
 
@@ -51,6 +51,7 @@ end
 ```
 
 In view:
+
     <%= easy_filter ModelClass, [:name, :expiry_date, [:status, ModelClass.statuses]] %>
 
 #### Advanced parameters
