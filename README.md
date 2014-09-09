@@ -1,4 +1,5 @@
 # EasyFilter
+[![Build Status](https://travis-ci.org/kepes/easy-filter.svg?branch=master)](https://travis-ci.org/kepes/easy-filter
 
 By [Peter Kepes](https://github.com/kepes).
 
