@@ -1,8 +1,8 @@
 # EasyFilter
 
-By [Peter Kepes](https://github.com/kepes).
+By [Peter Kepes](https://github.com/kepes)
 
-[![Build Status](https://travis-ci.org/kepes/easy-filter.svg?branch=master)](https://travis-ci.org/kepes/easy-filter
+[![Build Status](https://travis-ci.org/kepes/easy-filter.svg?branch=master)](https://travis-ci.org/kepes/easy-filter)
 
 Filter and sort `ActiveRecord` model for Rails app with [Bootstrap](http://getbootstrap.com/) view helpers.
 
