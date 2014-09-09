@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['kepes.peter@codeplay.hu']
   spec.description   = 'Filter and sort ActiveRecord model for Rails app with Bootstrap view helpers'
   spec.summary       = 'ActiveRecord model filter'
-  spec.homepage      = 'https://github.com/kepes/easy_filter'
+  spec.homepage      = 'https://github.com/kepes/easy-filter'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($RS)
