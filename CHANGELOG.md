@@ -1,3 +1,9 @@
+## V0.0.4
+
+* Added TravisCI
+* Rubocop added to TravisCI
+* Reorganize source code for Rubocop
+
 ## V0.0.3
 
 * Gem homepage URL changed
