@@ -1,6 +1,11 @@
 module EasyFilter
   # Define methods for ActiveRecord
   module ModelAdditions
+    # 'easy_filter' for ActiveRecor models to filter result based on a filter hash
+    # or HTTP parameters.
+    #
+    # @params [Hash] filter parameters hash
+    # @prefixes [Hash] filter parameter prefixes mainly for prefixing HTML input elements
     def easy_filter(params, prefixes = { main: 'filter_',
                                          from: 'from_',
                                          to: 'to_',
