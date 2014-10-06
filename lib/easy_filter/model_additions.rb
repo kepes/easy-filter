@@ -24,7 +24,7 @@ module EasyFilter
       params[prefixes[:direction]] ||= 'desc'
 
       sort_column = add_model params[prefixes[:sort]]
-      # TODO included model fields not in 'column_names'. Somehow need to check if given column name valid
+      # TODO: included model fields not in 'column_names'. Somehow need to check if given column name valid
       # sort_column = column_names.include?(params[prefixes[:sort]]) ? params[prefixes[:sort]] : add_model('id')
       sort_direction = %w(asc desc).include?(params[prefixes[:direction]]) ? params[prefixes[:direction]] : 'desc'
 
@@ -54,7 +54,7 @@ module EasyFilter
     end
 
     def add_model(field)
-      return self.quoted_table_name + '.' + field unless field.include? '.'
+      return quoted_table_name + '.' + field unless field.include? '.'
       field
     end
   end
