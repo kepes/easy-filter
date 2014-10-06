@@ -48,10 +48,10 @@ EasyFilter works on ActiveRecord::Relation. You can chain with any other module 
 
 You can define an `Array` of `Hash` and EasyFilter will generate a dropdown automaticly.
 
-Code in model or controller:
+Code in helper:
 
 ```ruby
-def self.statuses
+def model_statuses
   [
     { code: 'A', name: 'Status A', color: :default},
     { code: 'B', name: 'Status B', color: :info},
@@ -62,7 +62,7 @@ end
 
 In view:
 
-    <%= easy_filter ModelClass, [:name, :expiry_date, [:status, ModelClass.statuses]] %>
+    <%= easy_filter ModelClass, [:name, :expiry_date, {field: :status, items: model_statuses, label: t(:lable)}] %>
 
 #### Advanced parameters
 
