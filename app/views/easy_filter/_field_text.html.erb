@@ -1,1 +1,1 @@
-<%= text_field_tag("#{filter_prefixes[:main]}#{filter_col_name}", request.params["#{filter_prefixes[:main]}#{filter_col_name}"], class: 'form-control', placeholder: t("activerecord.attributes.#{filter_model_class.name.downcase}.#{filter_col_name}")) %>
+<%= text_field_tag("#{filter_prefixes[:main]}#{filter[:field]}", request.params["#{filter_prefixes[:main]}#{filter[:field]}"], class: 'form-control', placeholder: filter[:label]) %>

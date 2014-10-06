@@ -17,53 +17,55 @@ module EasyFilter
       form = render_easy 'form_open', prefixes, model_class
 
       filters.each do |filter|
-        col_name, col_type = determine_column filter, model_class
-        form += render_easy 'form_field_open', prefixes, model_class
+        f = determine_column filter, model_class
+        form += render_easy 'form_field_open', prefixes
 
-        case col_type
+        case f[:col_type]
         when :datetime
-          form += render_easy 'field_datetime', prefixes, model_class, col_name
+          form += render_easy 'field_datetime', prefixes, f
 
         when :array
-          form += render_easy 'field_array', prefixes, model_class, col_name, filter[1]
+          form += render_easy 'field_array', prefixes, f
 
         else
-          form += render_easy 'field_text', prefixes, model_class, col_name
+          form += render_easy 'field_text', prefixes, f
         end
 
-        form += render_easy 'form_field_close', prefixes, model_class
+        form += render_easy 'form_field_close', prefixes
       end
 
-      form += render_easy 'buttons', prefixes, model_class
-      form += render_easy 'form_close', prefixes, model_class
+      form += render_easy 'buttons', prefixes
+      form += render_easy 'form_close', prefixes
     end
 
     private
 
     def determine_column(filter, model_class)
-      col_name = filter if filter.is_a?(Symbol) || filter.is_a?(String)
-      col_name = filter[0] if filter.is_a? Array
+      filter = {field: filter.to_s} if filter.is_a?(Symbol) || filter.is_a?(String)
+      p "debug:"
+      p filter[:field]
+      filter[:field] = filter[:field].to_s
 
-      col_type = nil
-      if filter.is_a? Array
-        col_type = :array
+      filter[:label] ||= t("activerecord.attributes.#{model_class.name.downcase}.#{filter[:field]}")
+
+      unless filter[:items].nil?
+        filter[:col_type] = :array
       else
         model_class.columns.each do |column|
-          if column.name == col_name.to_s
-            col_type = column.type
+          if column.name == filter[:field]
+            filter[:col_type] = column.type
             break
           end
         end
       end
-      [col_name, col_type]
+
+      filter
     end
 
-    def render_easy(name, prefixes, model_class, col_name = nil, elements = nil)
+    def render_easy(name, prefixes, filter = nil)
       render partial: "easy_filter/#{name}",
              locals: { filter_prefixes: prefixes,
-                       filter_model_class: model_class,
-                       filter_col_name: col_name,
-                       elements: elements }
+                       filter: filter }
     end
   end
 end

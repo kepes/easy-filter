@@ -1,19 +1,19 @@
 <div class="dropdown">
-<%= hidden_field_tag("#{filter_prefixes[:main]}#{filter_prefixes[:exact]}#{filter_col_name}", request.params["#{filter_prefixes[:main]}#{filter_prefixes[:exact]}#{filter_col_name}"]) %>
-<% button_text = "<span>#{t("activerecord.attributes.#{filter_model_class.name.downcase}.#{filter_col_name}")}</span>" %>
+<%= hidden_field_tag("#{filter_prefixes[:main]}#{filter_prefixes[:exact]}#{filter[:field]}", request.params["#{filter_prefixes[:main]}#{filter_prefixes[:exact]}#{filter[:field]}"]) %>
+<% button_text = "<span>#{filter[:label]}</span>" %>
 
-<% elements.each do |item|
-  if request.params["#{filter_prefixes[:main]}#{filter_prefixes[:exact]}#{filter_col_name}"] == item[:code]
+<% filter[:items].each do |item|
+  if request.params["#{filter_prefixes[:main]}#{filter_prefixes[:exact]}#{filter[:field]}"] == item[:code]
     button_text = "<span class=\"label label-#{item[:color]}\">#{item[:name]}</span>"
     break
   end
 end %>
 
-<button class="btn btn-default dropdown-toggle" type="button" id="dropdownFilterButton-<%= filter_col_name %>" data-toggle="dropdown"><%= button_text.html_safe %>
+<button class="btn btn-default dropdown-toggle" type="button" id="dropdownFilterButton-<%= filter[:field] %>" data-toggle="dropdown"><%= button_text.html_safe %>
 <span class="caret"></span></button>
 
-<ul class="dropdown-menu dropdown-filter" aria-labelledby="dropdownFilterButton-<%= filter_col_name %>">
-<% elements.each do |item| %>
+<ul class="dropdown-menu dropdown-filter" aria-labelledby="dropdownFilterButton-<%= filter[:field] %>">
+<% filter[:items].each do |item| %>
   <li role="presentation"><a role="menuitem" tabindex="-1" data-target="<%= item[:code] %>"><span class="label label-<%= item[:color]%>"><%= item[:name] %></span></a></li>
 <% end %>
 </ul>
