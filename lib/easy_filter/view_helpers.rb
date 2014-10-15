@@ -55,6 +55,10 @@ module EasyFilter
             break
           end
         end
+        if filter[:col_type] == :boolean
+          filter[:items] = boolean_array
+          filter[:col_type] = :array
+        end
       end
 
       filter
@@ -64,6 +68,11 @@ module EasyFilter
       render partial: "easy_filter/#{name}",
              locals: { filter_prefixes: prefixes,
                        filter: filter }
+    end
+
+    def boolean_array
+      [{ code: 1, name: t(:yes), color: :success, icon: 'check'},
+       { code: 0, name: t(:no), color: :danger, icon: 'remove'}]
     end
   end
 end
