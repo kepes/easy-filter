@@ -3,7 +3,7 @@
 <% button_text = "<span>#{filter[:label]}</span>" %>
 
 <% filter[:items].each do |item|
-  if request.params["#{filter_prefixes[:main]}#{filter_prefixes[:exact]}#{filter[:field]}"] == item[:code]
+  if request.params["#{filter_prefixes[:main]}#{filter_prefixes[:exact]}#{filter[:field]}"] == item[:code].to_s
     button_text = "<span class=\"label label-#{item[:color]}\">#{item[:name]}</span>"
     break
   end
