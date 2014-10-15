@@ -42,8 +42,6 @@ module EasyFilter
 
     def determine_column(filter, model_class)
       filter = {field: filter.to_s} if filter.is_a?(Symbol) || filter.is_a?(String)
-      p "debug:"
-      p filter[:field]
       filter[:field] = filter[:field].to_s
 
       filter[:label] ||= t("activerecord.attributes.#{model_class.name.downcase}.#{filter[:field]}")
