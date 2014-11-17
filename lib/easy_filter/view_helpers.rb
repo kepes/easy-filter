@@ -44,7 +44,7 @@ module EasyFilter
       filter = {field: filter.to_s} if filter.is_a?(Symbol) || filter.is_a?(String)
       filter[:field] = filter[:field].to_s
 
-      filter[:label] ||= t("activerecord.attributes.#{model_class.name.downcase}.#{filter[:field]}")
+      filter[:label] ||= t("activerecord.attributes.#{model_class.name.underscore}.#{filter[:field]}")
 
       unless filter[:items].nil?
         filter[:col_type] = :array
