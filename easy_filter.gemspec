@@ -23,4 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'activerecord', '~> 3.2'
   spec.add_development_dependency 'sqlite3'
+  spec.add_runtime_dependency 'jquery-rails'
+  spec.add_runtime_dependency 'jquery-ui-rails'
 end

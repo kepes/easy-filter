@@ -1,3 +1,5 @@
+//= require jquery
+//= require jquery-ui
 $(document).ready(function() {
   $('ul.dropdown-filter li a').click(function (e) {
     html = $(this).html();
