@@ -53,9 +53,9 @@ Code in helper:
 ```ruby
 def model_statuses
   [
-    { code: 'A', name: 'Status A', color: :default},
-    { code: 'B', name: 'Status B', color: :info},
-    { code: 'C', name: 'Status C', color: :warning},
+    { value: 'A', text: 'Status A', color: :default},
+    { value: 'B', text: 'Status B', color: :info},
+    { value: 'C', text: 'Status C', color: :warning},
   ]
 end
 ```

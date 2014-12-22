@@ -71,8 +71,8 @@ module EasyFilter
     end
 
     def boolean_array
-      [{ code: 1, name: t(:yes), color: :success, icon: 'check'},
-       { code: 0, name: t(:no), color: :danger, icon: 'remove'}]
+      [{ value: 1, text: t(:yes), color: :success, icon: 'check'},
+       { value: 0, text: t(:no), color: :danger, icon: 'remove'}]
     end
   end
 end
