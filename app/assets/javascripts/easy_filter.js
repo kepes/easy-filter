@@ -1,19 +1,27 @@
 //= require jquery
 //= require jquery-ui
-$(document).ready(function() {
-  $('ul.dropdown-filter li a').click(function (e) {
-    html = $(this).html();
-    $(this).parents('ul.dropdown-filter').prev().children().first().remove();
-    $(this).parents('ul.dropdown-filter').prev().prepend(html);
-    $(this).parents('div.dropdown').removeClass('open')
-    $(this).parents('div.dropdown').find('input').first().val($(this).attr('data-target'));
-  });
-});
 
-$(document).ready(function() {
-  $(".datepicker").datepicker($.datepicker.regional[ "hu" ]);
-  $(".datepicker").each(function() { $(this).val($(this).attr('value')); });
-});
+if (typeof Turbolinks !== 'undefined') {
+  $(document).on("page:change", function () {
+    init_easy_filter();
+  });
+} else {
+  $(document).ready(function() {
+    init_easy_filter();
+  });
+}
+
+function init_easy_filter() {
+  $('ul.easy-filter-dropdown li a').click(function (e) {
+    html = $(this).html();
+    $(this).parents('ul.easy-filter-dropdown').prev().children().first().remove();
+    $(this).parents('ul.easy-filter-dropdown').prev().prepend(html);
+    $(this).parents('div.easy-filter-dropdown').removeClass('open')
+    $(this).parents('div.easy-filter-dropdown').find('input').first().val($(this).attr('data-target'));
+  });
+  $(".easy-filter-datepicker").datepicker($.datepicker.regional[ "hu" ]);
+  $(".easy-filter-datepicker").each(function() { $(this).val($(this).attr('value')); });
+}
 
 /* Hungarian initialisation for the jQuery UI date picker plugin. */
 /* Written by Peter Kepes (https://github.com/kepes),

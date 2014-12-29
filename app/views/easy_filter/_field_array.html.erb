@@ -1,4 +1,4 @@
-<div class="dropdown">
+<div class="dropdown easy-filter-dropdown">
 <%= hidden_field_tag("#{filter_prefixes[:main]}#{filter_prefixes[:exact]}#{filter[:field]}", request.params["#{filter_prefixes[:main]}#{filter_prefixes[:exact]}#{filter[:field]}"]) %>
 <% button_text = "<span>#{filter[:label]}</span>" %>
 
@@ -12,7 +12,7 @@ end %>
 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownFilterButton-<%= filter[:field] %>" data-toggle="dropdown"><%= button_text.html_safe %>
 <span class="caret"></span></button>
 
-<ul class="dropdown-menu dropdown-filter" aria-labelledby="dropdownFilterButton-<%= filter[:field] %>">
+<ul class="dropdown-menu dropdown-filter easy-filter-dropdown" aria-labelledby="dropdownFilterButton-<%= filter[:field] %>">
 <% filter[:items].each do |item| %>
   <li role="presentation"><a role="menuitem" tabindex="-1" data-target="<%= item[:value] %>"><span class="label label-<%= item[:color]%>"><%= item[:text] %></span></a></li>
 <% end %>
