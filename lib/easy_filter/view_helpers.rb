@@ -24,6 +24,9 @@ module EasyFilter
         when :datetime
           form += render_easy 'field_datetime', prefixes, f
 
+        when :date
+          form += render_easy 'field_datetime', prefixes, f
+
         when :array
           form += render_easy 'field_array', prefixes, f
 
