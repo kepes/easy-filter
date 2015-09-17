@@ -24,12 +24,12 @@ module EasyFilter
 
       # TODO: included model fields not in 'column_names'. Somehow need to check if given column name valid
       # sort_column = column_names.include?(params[prefixes[:sort]]) ? params[prefixes[:sort]] : add_model('id')
-      filter.order("#{add_model params[prefixes[:sort]]} #{sort_direction(params)}")
+      filter.order("#{add_model params[prefixes[:sort]]} #{sort_direction(params, prefixes)}")
     end
 
     private
 
-    def sort_direction(params)
+    def sort_direction(params, prefixes)
       %w(asc desc).include?(params[prefixes[:direction]]) ? params[prefixes[:direction]] : 'desc'
     end
 
