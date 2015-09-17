@@ -44,14 +44,11 @@ module EasyFilter
     private
 
     def determine_column(filter, model_class)
-      filter = {field: filter.to_s} if filter.is_a?(Symbol) || filter.is_a?(String)
+      filter = { field: filter.to_s } if filter.is_a?(Symbol) || filter.is_a?(String)
       filter[:field] = filter[:field].to_s
-
       filter[:label] ||= t("activerecord.attributes.#{model_class.name.underscore}.#{filter[:field]}")
 
-      unless filter[:items].nil?
-        filter[:col_type] = :array
-      else
+      if filter[:items].nil?
         model_class.columns.each do |column|
           if column.name == filter[:field]
             filter[:col_type] = column.type
@@ -62,6 +59,8 @@ module EasyFilter
           filter[:items] = boolean_array
           filter[:col_type] = :array
         end
+      else
+        filter[:col_type] = :array
       end
 
       filter
@@ -74,8 +73,8 @@ module EasyFilter
     end
 
     def boolean_array
-      [{ value: 1, text: t(:yes), color: :success, icon: 'check'},
-       { value: 0, text: t(:no), color: :danger, icon: 'remove'}]
+      [{ value: 1, text: t(:yes), color: :success, icon: 'check' },
+       { value: 0, text: t(:no), color: :danger, icon: 'remove' }]
     end
   end
 end
