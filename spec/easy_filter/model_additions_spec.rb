@@ -94,6 +94,5 @@ describe EasyFilter::ModelAdditions do
 
     users = User.scoped.easy_filter('filter_to_born' => '2003.01.01')
     expect(users.count).to eq(3)
-
   end
 end
