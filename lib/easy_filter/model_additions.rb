@@ -12,26 +12,26 @@ module EasyFilter
                                          exact: 'exact_',
                                          sort: 'sort',
                                          direction: 'direction' })
+
       filter = self
       params.each do |key, value|
         next unless key.start_with?(prefixes[:main]) && !value.blank? && key != "#{prefixes[:main]}button"
-
-        field = del_prefix(key, prefixes[:main])
-        filter = add_where(filter, field, value, prefixes)
+        filter = add_where(filter, del_prefix(key, prefixes[:main]), value, prefixes)
       end
 
       params[prefixes[:sort]] ||= 'id'
       params[prefixes[:direction]] ||= 'desc'
 
-      sort_column = add_model params[prefixes[:sort]]
       # TODO: included model fields not in 'column_names'. Somehow need to check if given column name valid
       # sort_column = column_names.include?(params[prefixes[:sort]]) ? params[prefixes[:sort]] : add_model('id')
-      sort_direction = %w(asc desc).include?(params[prefixes[:direction]]) ? params[prefixes[:direction]] : 'desc'
-
-      filter.order("#{sort_column} #{sort_direction}")
+      filter.order("#{add_model params[prefixes[:sort]]} #{sort_direction(params)}")
     end
 
     private
+
+    def sort_direction(params)
+      %w(asc desc).include?(params[prefixes[:direction]]) ? params[prefixes[:direction]] : 'desc'
+    end
 
     def add_where(filter, field, value, prefixes)
       if field.start_with?(prefixes[:from])
