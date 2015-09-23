@@ -1,4 +1,6 @@
 ## V0.2.0
+* Correct Rubocop ABC errors with refactoring
+* RSpec tests for field with more underscores
 * Change sort_direction attributes
 * Change ruby version to 2.1.6
 * Some minor cosmetic changes
