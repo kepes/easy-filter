@@ -11,6 +11,7 @@ class CreateUsersTable < ActiveRecord::Migration
     create_table :users do |t|
       t.string :name
       t.string :born
+      t.string :field_with_underscore
     end
     puts 'Users created'
   end
@@ -28,10 +29,10 @@ end
 describe EasyFilter::ModelAdditions do
   before(:all) do
     CreateUsersTable.migrate(:up)
-    User.create!(id: 1, name: 'aaaa aaaa', born: '2001.01.01')
-    User.create!(id: 2, name: 'aaaa bbbb', born: '2002.01.01')
-    User.create!(id: 3, name: 'bbbb bbbb', born: '2003.01.01')
-    User.create!(id: 4, name: 'aaaa cccc', born: '2004.01.01')
+    User.create!(id: 1, name: 'aaaa aaaa', born: '2001.01.01', field_with_underscore: 'aaaa')
+    User.create!(id: 2, name: 'aaaa bbbb', born: '2002.01.01', field_with_underscore: 'aaaa')
+    User.create!(id: 3, name: 'bbbb bbbb', born: '2003.01.01', field_with_underscore: 'bbbb')
+    User.create!(id: 4, name: 'aaaa cccc', born: '2004.01.01', field_with_underscore: 'aaaa')
   end
 
   after(:all) do
@@ -70,6 +71,14 @@ describe EasyFilter::ModelAdditions do
 
     users = User.scoped.easy_filter('filter_name' => 'bb')
     expect(users.count).to eq(2)
+  end
+
+  it 'should filter by first_name' do
+    users = User.scoped.easy_filter('filter_field_with_underscore' => 'aa')
+    expect(users.count).to eq(3)
+
+    users = User.scoped.easy_filter('filter_field_with_underscore' => 'bb')
+    expect(users.count).to eq(1)
   end
 
   it 'should exact filter by id' do
