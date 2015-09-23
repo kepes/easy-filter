@@ -24,5 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'activerecord', '~> 3.2'
   spec.add_development_dependency 'sqlite3'
   spec.add_runtime_dependency 'jquery-rails', '~> 3.1.4'
-  spec.add_runtime_dependency 'jquery-ui-rails', , '~> 5.0.5'
+  spec.add_runtime_dependency 'jquery-ui-rails', '~> 5.0.5'
 end
