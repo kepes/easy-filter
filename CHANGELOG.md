@@ -1,3 +1,30 @@
+## V0.2.0
+* Change sort_direction attributes
+* Change ruby version to 2.1.6
+* Some minor cosmetic changes
+* Refactoring model_additions
+* Remove blank line
+* Correct rubocop config errors
+* handle date type with from and to field
+* Rails4 turbolinks correction
+* new version
+* jquery added to engine
+* change parameter names in hash
+* change downcase to underscore on class name conversion
+* convert array item code to string for compare to request param
+* Handle boolean column type
+* Remove debug message
+
+## V0.1.1
+* correct rubocop problems
+
+## V0.1.0
+* Syntax change after refactoring
+* Refactoring view helper and views
+* add table name to column name if it isn't specified
+* Add comment for easy_filter model addition
+* Changes added to changelog
+
 ## V0.0.4
 
 * Added TravisCI
