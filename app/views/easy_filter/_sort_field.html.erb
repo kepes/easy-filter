@@ -1,2 +1,2 @@
 <% icon = "<span class=\"glyphicon glyphicon-chevron-#{direction == "asc" ? "up" : "down"}\"></span>" %>
-<%= link_to "#{title} #{column == params[sort_param_name] ? icon : ''}".html_safe, request.parameters.merge(sort_param_name => column, direction_param_name => direction) %>
+<%= link_to "#{title} #{column == cleaned_params[sort_param_name] ? icon : ''}".html_safe, cleaned_params.merge(sort_param_name => column, direction_param_name => direction) %>

@@ -92,18 +92,18 @@ Default view helper templates generates [Bootstrap](http://getbootstrap.com/) co
     app/views/easy_filter/_form_field_close.html.erb
     app/views/easy_filter/_form_open.html.erb
 
-#### Advanced parameters
+#### Configuration
 
-View helpers provide paramters to define HTML input field names.
+You can configure input field names used by EasyFilter in environments
 
-    def easy_filter(model_class, filters, prefixes = { main: 'filter_', from: 'from_', to: 'to_', exact: 'exact_' })
-
-    def easy_sort(column, title = nil, sort = 'sort', direction = 'direction')
-
-All default templates will use specified prefixes for input fields. If you have to use different names just use this parameters to redefine it.
-
-If you change prefix parameters dont't forget to change it for model addition too!
-
+    Rails.application.configure do
+      config.easy_filter_defaults = {
+        prefixes: { main: 'filter_', from: 'from_', to: 'to_', exact: 'exact_' },
+        allowed_params: %w(sort direction),
+        sort_params: { field: 'sort', direction: 'direction' }
+      }
+    end
+    
 ## Contributing
 
 1. Fork it

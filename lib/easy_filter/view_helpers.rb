@@ -1,37 +1,58 @@
 module EasyFilter
   # View helpers for EasyFilter
   module ViewHelpers
-    def easy_sort(column, title = nil, sort = 'sort', direction = 'direction')
+    def easy_sort(column, title = nil)
+      config = easy_filter_defaults
+      cleaned_params = clean_params params, config
       title ||= column.titleize
-      dir = (column.to_s == params[sort] && params[direction] == 'asc') ? 'desc' : 'asc'
+      dir = sort_direction column, config
 
       render partial: 'easy_filter/sort_field',
-             locals: { column: column.to_s,
-                       title: title,
-                       sort_param_name: sort,
-                       direction: dir,
-                       direction_param_name: direction }
+             locals:
+             { column: column.to_s,
+               title: title,
+               sort_param_name: config[:sort_params][:field],
+               direction: dir,
+               direction_param_name: config[:sort_params][:direction],
+               cleaned_params: cleaned_params
+             }
     end
 
-    def easy_filter(model_class, filters, prefixes = { main: 'filter_', from: 'from_', to: 'to_', exact: 'exact_' })
-      form = render_easy 'form_open', prefixes, model_class
+    def easy_filter(model_class, filters)
+      config = easy_filter_defaults
+      cleaned_params = clean_params params, config
+      form = render_easy 'form_open', config, cleaned_params
 
       filters.each do |filter|
         f = determine_column filter, model_class
-        form += render_field f, prefixes
+        form += render_field f, config, cleaned_params
       end
 
-      form += render_easy 'buttons', prefixes
-      form += render_easy 'form_close', prefixes
+      form += render_easy 'buttons', config, cleaned_params
+      form += render_easy 'form_close', config, cleaned_params
     end
 
     private
 
-    def render_field(filter, prefixes)
-      form = render_easy 'form_field_open', prefixes
+    def easy_filter_defaults
+      rails_defaults = Rails.configuration.easy_filter_defaults if defined? Rails.configuration.easy_filter_defaults
+      rails_defaults ||= {}
+      {
+        prefixes: { main: 'filter_', from: 'from_', to: 'to_', exact: 'exact_' },
+        allowed_params: %w(sort direction),
+        sort_params: { field: 'sort', direction: 'direction' }
+      }.deep_merge rails_defaults
+    end
+
+    def sort_direction(column, config)
+      (column.to_s == params[config[:sort_params][:field]] && params[config[:sort_params][:direction]] == 'asc') ? 'desc' : 'asc'
+    end
+
+    def render_field(filter, config, cleaned_params)
+      form = render_easy 'form_field_open', config, cleaned_params
       view = column_view filter[:col_type]
-      form += render_easy view, prefixes, filter
-      form + render_easy('form_field_close', prefixes)
+      form += render_easy view, config, cleaned_params, filter
+      form + render_easy('form_field_close', config, cleaned_params)
     end
 
     def column_view(col_type)
@@ -78,10 +99,17 @@ module EasyFilter
       filter
     end
 
-    def render_easy(name, prefixes, filter = nil)
+    def render_easy(name, config, cleaned_params, filter = nil)
       render partial: "easy_filter/#{name}",
-             locals: { filter_prefixes: prefixes,
-                       filter: filter }
+             locals: {
+               filter_prefixes: config[:prefixes],
+               filter: filter,
+               cleaned_params: cleaned_params
+             }
+    end
+
+    def clean_params(params, config)
+      params.select { |k| k.to_s.starts_with?(config[:prefixes][:main]) || config[:allowed_params].include?(k) }
     end
 
     def boolean_array
