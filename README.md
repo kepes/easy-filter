@@ -2,7 +2,7 @@
 
 By [Peter Kepes](https://github.com/kepes)
 
-[![Build Status](https://travis-ci.org/kepes/easy-filter.svg?branch=master)](https://travis-ci.org/kepes/easy-filter) [![Gem Version](https://badge.fury.io/rb/easy_filter.svg)](http://badge.fury.io/rb/easy_filter) [![Code Climate](https://codeclimate.com/github/kepes/easy-filter/badges/gpa.svg)](https://codeclimate.com/github/kepes/easy-filter)
+[![Build Status](https://travis-ci.org/kepes/easy-filter.svg?branch=master)](https://travis-ci.org/kepes/easy-filter) [![Gem Version](https://badge.fury.io/rb/easy_filter.svg)](http://badge.fury.io/rb/easy_filter) [![Code Climate](https://codeclimate.com/github/kepes/easy-filter/badges/gpa.svg)](https://codeclimate.com/github/kepes/easy-filter) [![security](https://hakiri.io/github/kepes/easy-filter/master.svg)](https://hakiri.io/github/kepes/easy-filter/master)
 
 Filter and sort `ActiveRecord` model for Rails app with [Bootstrap](http://getbootstrap.com/) view helpers.
 
