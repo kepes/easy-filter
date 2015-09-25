@@ -1,3 +1,9 @@
+## V0.3.0
+* Correct XSS problem and add default config to view helper
+* correct typeo in gemspec
+* Define jquery-ui version numbers based on Hakiri warnings
+* Update README.md
+
 ## V0.2.0
 * Correct Rubocop ABC errors with refactoring
 * RSpec tests for field with more underscores
