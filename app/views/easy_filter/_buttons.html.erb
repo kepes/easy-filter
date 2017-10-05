@@ -1,2 +1,4 @@
-<%= button_tag(t(:filter), name: "#{filter_prefixes[:main]}button", value: :filter, class: 'btn btn-default') %>
-<%= link_to t(:clear_filter), cleaned_params.select { |k,v| !k.to_s.starts_with?(filter_prefixes[:main])}, class: 'btn btn-default' %>
+<div class="easy-filter-buttons">
+  <%= button_tag(t(:filter), name: "#{filter_prefixes[:main]}button", value: :filter, class: 'btn btn-default') %>
+  <%= link_to t(:clear_filter), cleaned_params.select { |k,v| !k.to_s.starts_with?(filter_prefixes[:main])}, class: 'btn btn-default' %>
+</div>
