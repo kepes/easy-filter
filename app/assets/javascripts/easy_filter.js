@@ -2,7 +2,7 @@
 //= require jquery-ui
 
 if (typeof Turbolinks !== 'undefined') {
-  $(document).on("page:change", function () {
+  $(document).on("page:load", function () {
     init_easy_filter();
   });
 } else {
